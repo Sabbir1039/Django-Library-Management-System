@@ -1,0 +1,21 @@
+{% extends 'main_app/index.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<h1 class="">{{ title }}</h1>
+<hr>
+<form class="form-horizontal" method="POST">
+    {% csrf_token %}
+    {% for form_field in form %}
+    <div class="form-group row">
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+            {{ form_field.label_tag }}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+            {{ form_field|add_class:'form-control' }}
+        </div>
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="save" class="btn btn-lg btn-primary">
+</form>
+{% endblock %}

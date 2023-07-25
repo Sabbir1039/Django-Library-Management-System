@@ -1,0 +1,61 @@
+{% extends 'main_app/index.html' %}
+
+{% block style %}
+<style>
+    #message {
+        padding: 12px 0px;
+        color: green;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-2">
+
+    {% for msg in messages %}
+    <p id="message" class="mx-2 my-1">{{ msg }}</p>
+    {% endfor %}
+
+    <h2>All Books</h2>
+    <hr>
+    <div class="row">
+        <div class="col-lg-9 my-1">
+            <form method="GET">
+                {{ book_filter.form }}
+                <button class="btn btn-info" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="col-lg-3 my-1">
+            <button class="btn btn-md btn-success"><a class="anchor text-light" href="{% url 'addBook' %}">Add
+                    Book</a></button>
+        </div>
+    </div>
+
+    <table class="table table-sm table-bordered mt-3">
+        <thead>
+            <tr class="bg-light text-center">
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Language</th>
+                <th>Details</th>
+            </tr>
+
+            {% for book in books %}
+            <tr>
+                <td class="text-center">{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.language }}</td>
+                <td class="text-center"><button class="btn btn-sm bg-info"><a class="text-light"
+                            href="{% url 'bookDetails' book.id %}">Show</a></button></td>
+            </tr>
+            {% endfor %}
+
+
+        </thead>
+    </table>
+
+</div>
+{% endblock %}
