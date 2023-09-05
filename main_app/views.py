@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import AuthorForm, BookForm, UserForm
+from .forms import AuthorForm, BookForm
 from .models import Author, Book
 from .filters import AuthorFilter, BookFilter
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+# from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
@@ -45,7 +45,7 @@ def books(request):
 
 
 # Add authors to database using forms
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def add_author(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
@@ -64,7 +64,7 @@ def add_author(request):
 
 
 # Add book to database using forms
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def add_book(request):
     if request.method == "POST":
         form = BookForm(request.POST)
@@ -84,7 +84,7 @@ def add_book(request):
 
 
 # Show details of Author
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def author_details(request, author_id):
     author = Author.objects.get(pk=author_id)
     context = {
@@ -94,7 +94,7 @@ def author_details(request, author_id):
 
 
 # update Author
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def update_author(request, author_id):
     author = Author.objects.get(pk=author_id)
     if request.method == "POST":
@@ -115,7 +115,7 @@ def update_author(request, author_id):
 
 
 # Delete Author
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def delete_author(request, author_id):
     author = Author.objects.get(pk=author_id)
     if request.method == "POST":
@@ -128,7 +128,7 @@ def delete_author(request, author_id):
 
 
 # Show book details
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def book_details(request, book_id):
     book = Book.objects.get(pk=book_id)
     context = {
@@ -138,7 +138,7 @@ def book_details(request, book_id):
 
 
 # Update book details
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def update_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     if request.method == "POST":
@@ -159,7 +159,7 @@ def update_book(request, book_id):
 
 
 # Delete book
-@login_required(login_url='userLogin')
+# @login_required(login_url='userLogin')
 def delete_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     if request.method == "POST":
@@ -171,39 +171,3 @@ def delete_book(request, book_id):
         return render(request, 'main_app/delete_book_confirm.html', {'book': book})
 
 
-# Register admin-level user account
-def register(request):
-    form = UserForm
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            name = form.cleaned_data.get('username')
-            messages.success(request, 'Account has been created for ' + name)
-            return redirect('userLogin')
-    context = {
-        'userform': form,
-    }
-    return render(request, 'main_app/register.html', context)
-
-
-# Login resigterd user
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('/')
-        else:
-            messages.info(
-                request, 'Username or Password is not correct! Try Again!')
-    return render(request, 'main_app/loginpage.html')
-
-
-# Logout function
-def logoutpage(request):
-    logout(request)
-    return redirect('userLogin')
