@@ -1,0 +1,21 @@
+{% extends 'user_accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container outer-content">
+    <div class="inner-content">
+        <div class="form-content">
+            <form id="register-form" method="POST">
+                <legend>Log in Here</legend>
+                {% csrf_token %}
+                {{ form|crispy }}
+            
+                <input type="submit" value="Sign In" class="btn btn-md btn-success">
+            </form>
+            <p class="my-1">Need an account? <a href="#">Sign Up</a></p>
+
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

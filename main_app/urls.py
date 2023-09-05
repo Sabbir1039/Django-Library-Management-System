@@ -21,9 +21,4 @@ urlpatterns = [
     path('book_details/<int:book_id>', views.book_details, name='bookDetails'),
     path('update_book/<int:book_id>', views.update_book, name="updateBook"),
     path('delete_book/<int:book_id>', views.delete_book, name="deleteBook"),
-
-#     path('user_account_creation/', views.register,
-#          name='userAccountCreation'),
-#     path('user_login/', views.user_login, name='userLogin'),
-#     path('logout/', views.logoutpage, name="logout"),
 ]
