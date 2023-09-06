@@ -32,6 +32,13 @@
             <p class="alert alert-{{ msg.tags }}">{{ msg }}</p>
         {% endfor %}
     </div>
+    <div class="container title-content">
+        <div class="title">
+            <a class="btn btn-info" href="{% url 'home' %}">Home</a>
+            <h2>Library Management System</h2>
+        </div>
+    </div>
+    
     {% block content %}
     {% endblock %}
     
