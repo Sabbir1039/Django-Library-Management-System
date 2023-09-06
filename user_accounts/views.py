@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from user_accounts.forms import UserRegistrationForm
-from django.contrib.auth.models import User
 from user_accounts.models import Profile
 
 # Create your views here.
