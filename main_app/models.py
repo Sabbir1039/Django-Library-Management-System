@@ -32,7 +32,6 @@ class Book(models.Model):
     description = models.TextField(null=True)
     total_copies = models.PositiveIntegerField(default=0)
     available_copies = models.PositiveIntegerField(default=0)
-    # cover_image = models.ImageField(upload_to='', blank=True)
 
     def __str__(self) -> str:
         return f'{self.title}'

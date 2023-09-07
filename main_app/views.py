@@ -45,7 +45,7 @@ def books(request):
 
 
 # Add authors to database using forms
-# @login_required(login_url='userLogin')
+@login_required(login_url='login')
 def add_author(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
@@ -64,7 +64,7 @@ def add_author(request):
 
 
 # Add book to database using forms
-# @login_required(login_url='userLogin')
+@login_required(login_url='login')
 def add_book(request):
     if request.method == "POST":
         form = BookForm(request.POST)
@@ -84,7 +84,7 @@ def add_book(request):
 
 
 # Show details of Author
-# @login_required(login_url='userLogin')
+# @login_required(login_url='login')
 def author_details(request, author_id):
     author = Author.objects.get(pk=author_id)
     context = {
@@ -94,7 +94,7 @@ def author_details(request, author_id):
 
 
 # update Author
-# @login_required(login_url='userLogin')
+@login_required(login_url='login')
 def update_author(request, author_id):
     author = Author.objects.get(pk=author_id)
     if request.method == "POST":
@@ -102,7 +102,7 @@ def update_author(request, author_id):
         if form.is_valid():
             form.save()
             name = form.cleaned_data.get('name')
-            messages.success(request, f'Author: {name} successfully updated!')
+            messages.success(request, f"{name}'s profile successfully updated!")
             return redirect('authorDetails', author_id=author_id)
     else:
         form = AuthorForm(instance=author)
@@ -115,7 +115,7 @@ def update_author(request, author_id):
 
 
 # Delete Author
-# @login_required(login_url='userLogin')
+@login_required(login_url='login')
 def delete_author(request, author_id):
     author = Author.objects.get(pk=author_id)
     if request.method == "POST":
@@ -128,7 +128,7 @@ def delete_author(request, author_id):
 
 
 # Show book details
-# @login_required(login_url='userLogin')
+# @login_required(login_url='login')
 def book_details(request, book_id):
     book = Book.objects.get(pk=book_id)
     context = {
@@ -138,7 +138,7 @@ def book_details(request, book_id):
 
 
 # Update book details
-# @login_required(login_url='userLogin')
+@login_required(login_url='login')
 def update_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     if request.method == "POST":
@@ -159,7 +159,7 @@ def update_book(request, book_id):
 
 
 # Delete book
-# @login_required(login_url='userLogin')
+@login_required(login_url='login')
 def delete_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     if request.method == "POST":

@@ -4,13 +4,13 @@ body {
 }
 
 .sidebar {
-    height: 100vh;
+    min-height: 100vh;
     position: fixed;
     top: 56px;
     left: 0;
     bottom: 0;
-    width: 240px;
-    background-color: #97c4f7;
+    width: 200px;
+    background-color: #3f8ae081;
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -42,7 +42,7 @@ body {
 }
 
 .content {
-    margin-left: 240px;
+    margin-left: 200px;
     /* padding: 15px; */
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
