@@ -27,8 +27,13 @@
         </div>
 
         <div class="col-lg-3 my-1">
-            <button class="btn btn-md btn-success"><a class="anchor text-light" href="{% url 'addBook' %}">Add
+            {% if user.is_authenticated %}
+                {% if user.profile.user_type == "Librarian" or user.profile.user_type == "Admin" %}
+                <button class="btn btn-md btn-success"><a class="anchor text-light" href="{% url 'addBook' %}">Add
                     Book</a></button>
+                {% endif %}
+            {% endif %}
+            
         </div>
     </div>
 

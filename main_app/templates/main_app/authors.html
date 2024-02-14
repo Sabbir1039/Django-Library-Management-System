@@ -27,8 +27,13 @@
             </form>
         </div>
         <div class="col-lg-2">
-            <button class="btn btn-md btn-success"><a class="text-light" href="{% url 'addAuthor' %}">Add
+            {% if user.is_authenticated %}
+                {% if user.profile.user_type == "Librarian" or user.profile.user_type == "Admin" %}
+                <button class="btn btn-md btn-success"><a class="text-light" href="{% url 'addAuthor' %}">Add
                     Author</a></button>
+                {% endif %}
+            {% endif %}
+            
         </div>
     </div>
 

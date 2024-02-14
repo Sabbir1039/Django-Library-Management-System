@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
+    class Meta:
+        permissions = [
+            ("is_librarian", "Can access librarian-specific functionality"),
+            ("is_admin", "Can access admin-specific functionality"),
+        ]
+        
     USER_TYPE_CHOICE = [
         ('Student', 'Student'),
         ('Teacher', 'Teacher'),

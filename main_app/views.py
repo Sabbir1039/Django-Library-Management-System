@@ -4,7 +4,7 @@ from .models import Author, Book
 from .filters import AuthorFilter, BookFilter
 from django.contrib import messages
 # from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 # view function for home
@@ -46,6 +46,7 @@ def books(request):
 
 # Add authors to database using forms
 @login_required(login_url='login')
+@permission_required('user_accounts.is_librarian', raise_exception=True)
 def add_author(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
@@ -65,6 +66,7 @@ def add_author(request):
 
 # Add book to database using forms
 @login_required(login_url='login')
+@permission_required('user_accounts.is_librarian', raise_exception=True)
 def add_book(request):
     if request.method == "POST":
         form = BookForm(request.POST)
@@ -95,6 +97,7 @@ def author_details(request, author_id):
 
 # update Author
 @login_required(login_url='login')
+@permission_required('user_accounts.is_librarian', raise_exception=True)
 def update_author(request, author_id):
     author = Author.objects.get(pk=author_id)
     if request.method == "POST":
@@ -116,6 +119,7 @@ def update_author(request, author_id):
 
 # Delete Author
 @login_required(login_url='login')
+@permission_required('user_accounts.is_librarian', raise_exception=True)
 def delete_author(request, author_id):
     author = Author.objects.get(pk=author_id)
     if request.method == "POST":
@@ -139,6 +143,7 @@ def book_details(request, book_id):
 
 # Update book details
 @login_required(login_url='login')
+@permission_required('user_accounts.is_librarian', raise_exception=True)
 def update_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     if request.method == "POST":
@@ -160,6 +165,7 @@ def update_book(request, book_id):
 
 # Delete book
 @login_required(login_url='login')
+@permission_required('user_accounts.is_librarian', raise_exception=True)
 def delete_book(request, book_id):
     book = Book.objects.get(pk=book_id)
     if request.method == "POST":
